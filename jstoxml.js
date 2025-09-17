@@ -225,14 +225,14 @@ export const toXML = (obj = {}, config = {}) => {
             const { _name, _content } = obj;
 
             // Output text content without a tag wrapper.
-            if (_content === null && typeof contentMap !== 'function') {
+            if ((_content === null) && typeof contentMap !== 'function') {
                 outputStr = `${preIndentStr}${indentStr}${_name}`;
                 break;
             }
 
             // Handles arrays of primitive values. (#33)
             const isArrayOfPrimitives = Array.isArray(_content) && _content.every(isPrimitive);
-            if (isArrayOfPrimitives) {
+            if (isArrayOfPrimitives && _content.length > 0) {
                 const primitives = _content.map((a) => {
                     return toXML(
                         {

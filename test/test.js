@@ -173,6 +173,37 @@ describe('toXML', () => {
             const expectedResult = '<foo a="1" b="2">3</foo>';
             assert.equal(result, expectedResult);
         });
+
+        it('4', () => {
+            const val = {
+                _name: 'foo',
+                _content: [],
+            };
+            const result = toXML(val, {
+                selfCloseTags: false
+            });
+            const expectedResult = '<foo></foo>';
+            assert.equal(result, expectedResult);
+        });
+
+        it('5', () => {
+            const val = {
+                _name: 'foo',
+                _content: [
+                    {
+                        _name: 'bar',
+                        _content: 'BAR'
+                    },
+                    {
+                        _name: 'baz',
+                        _content: 'BAZ'
+                    }
+                ],
+            };
+            const result = toXML(val);
+            const expectedResult = '<foo><bar>BAR</bar><baz>BAZ</baz></foo>';
+            assert.equal(result, expectedResult);
+        });
     });
 
     describe('objects', () => {
